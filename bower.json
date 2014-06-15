@@ -1,6 +1,6 @@
 {
-  "name": "justified",
-  "version": "0.1.0",
+  "name": "justify",
+  "version": "0.1.4",
   "main": [
     "index.js"
   ]

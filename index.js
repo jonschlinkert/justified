@@ -1,5 +1,5 @@
 /*!
- * justified <https://github.com/jonschlinkert/justified>
+ * justify <https://github.com/jonschlinkert/justify>
  *
  * Copyright (c) 2014, Jon Schlinkert, contributors.
  * Licensed under the MIT License
@@ -42,7 +42,7 @@ function trueUp(line, longest) {
   return line;
 }
 
-var justified = function(str, width) {
+module.exports = function justify(str, width) {
   var arr = utils.lineArray(str, width);
   var longest = utils.charsLongest(arr);
   var last = arr.length - 1;
@@ -61,5 +61,3 @@ var justified = function(str, width) {
   });
   return stack.join('\n');
 };
-
-module.exports = justified;
