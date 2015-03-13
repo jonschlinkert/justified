@@ -1,7 +1,7 @@
 {
   "name": "justified",
   "description": "Wrap words to a specified length and justified the text.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/jonschlinkert/justified",
   "author": {
     "name": "Jon Schlinkert",
@@ -48,5 +48,8 @@
     "word-wrap",
     "words",
     "wrap"
-  ]
+  ],
+  "devDependencies": {
+    "mocha": "^2.2.1"
+  }
 }
