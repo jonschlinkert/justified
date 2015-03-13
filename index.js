@@ -1,62 +1,55 @@
 /*!
- * justify <https://github.com/jonschlinkert/justify>
+ * justified <https://github.com/jonschlinkert/justified>
  *
  * Copyright (c) 2014-2015, Jon Schlinkert.
  * Licensed under the MIT License.
  */
 
 var repeat = require('repeat-string');
-var randomize = require('randomatic');
-var _ = require('lodash');
-var utils = require('./lib/utils');
+var longest = require('longest');
+var wrap = require('word-wrap');
 
-var replaceAt = function(options) {
-  options = options || {};
+module.exports = justify;
 
-  var pattern = options.pattern;
-  var replacement = options.replacement;
-  var str = options.str;
-  var num = options.num;
+function justify (str, opts) {
+  opts = opts || {};
+  str = wrap(str, opts);
+  var indent = repeat(' ', opts.indent || 2);
+  var lines = str.split(/[\r\n]/);
+  var max = longest(lines).length;
+  var len = lines.length, i = 0;
+  var res = '';
 
-  var i = 0;
-  return str.replace(pattern, function (match) {
-    i++;
-    return new RegExp(num).test(i) ? replacement : match;
-  });
-};
-
-function trueUp(line, longest) {
-  var diff = longest - line.length - 1;
-  var indices = String(randomize('0', diff)).split('');
-  if (indices.length) {
-    var re = indices.join('|');
-    var opts = {
-      pattern: / /g,
-      replacement: '  ',
-      str: line,
-      num: '^' + re + '$'
-    };
-    line = replaceAt(opts);
+  while (len--) {
+    var line = trueUp(lines[i++].trim(), max) + '\n';
+    if (len === 0) {
+      line = line.split(' ').filter(Boolean).join(' ');
+    }
+    res += indent + line;
   }
-  return line;
+  return res;
 }
 
-module.exports = function justify(str, width) {
-  var arr = utils.lineArray(str, width);
-  var longest = utils.charsLongest(arr);
-  var last = arr.length - 1;
-  var stack = [];
+function trueUp(str, max) {
+  var len = str.length;
+  var diff = max - len;
+  var segs = str.split(' ');
 
-  arr.forEach(function(line, i) {
-    line = utils.justified(longest, line).replace(/\s+$/, '');
-    if(longest > line.length) {
-      line = trueUp(line, longest);
-    }
+  while (diff--) {
+    segs[random(0, segs.length - 2)] += ' ';
+  }
 
-    if (i === last) {
-      line = line.replace(/\s+/, ' ');
-    }
-    stack = stack.concat(line);
-  });
-  return stack.join('\n');
-};
+  var res = segs.join(' ').trim();
+  len = res.length;
+  diff = max - len;
+
+  if (diff > 0) {
+    var i = res.indexOf(' ', 1);
+    res = res.slice(0, i) + ' ' + res.slice(i);
+  }
+  return res;
+}
+
+function random(min, max) {
+  return min + Math.floor(Math.random() * (max - min + 1));
+}

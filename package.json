@@ -1,26 +1,25 @@
 {
-  "name": "justify",
-  "description": "Wrap words to a specified length and justify the text.",
-  "version": "0.1.4",
-  "homepage": "https://github.com/jonschlinkert/justify",
+  "name": "justified",
+  "description": "Wrap words to a specified length and justified the text.",
+  "version": "0.2.0",
+  "homepage": "https://github.com/jonschlinkert/justified",
   "author": {
     "name": "Jon Schlinkert",
     "url": "http://github.com/jonschlinkert/"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jonschlinkert/justify.git"
+    "url": "git://github.com/jonschlinkert/justified.git"
   },
   "bugs": {
-    "url": "https://github.com/jonschlinkert/justify/issues"
+    "url": "https://github.com/jonschlinkert/justified/issues"
   },
   "license": {
     "type": "MIT",
-    "url": "https://github.com/jonschlinkert/justify/blob/master/LICENSE"
+    "url": "https://github.com/jonschlinkert/justified/blob/master/LICENSE"
   },
   "files": [
-    "index.js",
-    "lib/"
+    "index.js"
   ],
   "main": "index.js",
   "engines": {
@@ -30,16 +29,9 @@
     "test": "mocha"
   },
   "dependencies": {
-    "array-sum": "^0.1.0",
-    "lodash": "^2.4.1",
-    "longest": "^0.2.1",
-    "randomatic": "^0.1.4",
-    "repeat-string": "^0.1.2",
-    "word-wrap": "^0.1.3",
-    "wordcount": "^0.1.0"
-  },
-  "devDependencies": {
-    "chai": "^1.9.1"
+    "longest": "^1.0.0",
+    "repeat-string": "^1.5.0",
+    "word-wrap": "^1.0.2"
   },
   "keywords": [
     "align",
@@ -48,8 +40,11 @@
     "justified",
     "justify",
     "line",
+    "pad",
+    "padding",
     "soft",
     "text",
+    "word",
     "word-wrap",
     "words",
     "wrap"
