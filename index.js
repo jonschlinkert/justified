@@ -10,55 +10,43 @@ var longest = require('longest');
 var wrap = require('word-wrap');
 var lastRandomIndex = 0;
 
-
 module.exports = function(str, options) {
-  var opts = Object.assign({}, options);
+  var opts = Object.assign({random: random, width: 55}, options);
   lastRandomIndex = 0;
 
   str = wrap(str, opts);
   var indent = opts.indent ? repeat(' ', opts.indent) : '';
   var lines = str.split(/\r?\n/);
-  var max = longest(lines).length;
+  var longestLength = longest(lines).length;
+  var max = Math.min(opts.width, longestLength);
   var len = lines.length;
   var res = '';
 
   for (var i = 0; i < len; i++) {
-    var line = lines[i];
-    var line = toMaxLength(line.trim(), max) + '\n';
-    if (len === 0) {
-      line = line.split(' ').filter(Boolean).join(' ');
+    var line = lines[i].trim();
+    var justify = i !== len - 1 || opts.justifyLastLine === true;
+    if (i === len - 1 && typeof opts.justifyLastLine === 'function') {
+      justify = opts.justifyLastLine(line, max);
     }
-    res += indent + line;
+    if (justify) {
+      line = toMaxLength(line, max, opts);
+    }
+    res += indent + line + '\n';
   }
   return res;
-}
+};
 
-function toMaxLength(str, max) {
+function toMaxLength(str, max, opts) {
   var len = str.length;
   var diff = max - len;
-  var segs = str.split(' ');
+  var words = str.split(' ');
 
-  while (diff--) {
-    segs[random(segs.length - 2)] += ' ';
+  var n = words.length;
+  while (diff-- > 0) {
+    words[opts.random(n - 2)] += ' ';
   }
 
-  var res = segs.join(' ').trim();
-  var n = 0;
-  len = res.length;
-  diff = max - len;
-
-  if (diff > 0) {
-    var i = res.indexOf(' ', n);
-    while (/^[\w\d]/.test(res.slice(i))) {
-      res = res.slice(0, i) + ' ' + res.slice(i);
-      n = 1;
-    }
-  }
-  return res;
-}
-
-function random(max) {
-  return Math.floor(pseudoRandom() * (max + 1));
+  return words.join(' ').trim();
 }
 
 /**
@@ -70,7 +58,7 @@ function random(max) {
  * every time you call the "justified" function.
  */
 
-function pseudoRandom() {
+function random(max) {
   var randomTable = [
     0.14975434898516649,
     0.48920102670502064,
@@ -96,5 +84,5 @@ function pseudoRandom() {
     lastRandomIndex++;
   }
 
-  return multiplier;
+  return Math.floor(multiplier * (max + 1));
 }
