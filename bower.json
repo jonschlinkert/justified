@@ -1,20 +1,11 @@
 {
   "name": "justified",
   "description": "Wrap words to a specified length and justified the text.",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/jonschlinkert/justified.git"
-  },
-  "license": {
-    "type": "MIT",
-    "url": "https://github.com/jonschlinkert/justified/blob/master/LICENSE"
-  },
+  "repository": "jonschlinkert/justified",
+  "license": "MIT",
   "homepage": "https://github.com/jonschlinkert/justified",
   "authors": [
-    {
-      "name": "Jon Schlinkert",
-      "homepage": "http://github.com/jonschlinkert/"
-    }
+    "Jon Schlinkert"
   ],
   "main": [
     "index.js"
@@ -39,5 +30,29 @@
     "word-wrap",
     "words",
     "wrap"
+  ],
+  "version": "0.2.1",
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/justified/issues"
+  },
+  "files": [
+    "index.js"
+  ],
+  "devDependencies": {
+    "mocha": "^2.2.1"
+  },
+  "ignore": [
+    "actual",
+    "bower_components",
+    "fixtures",
+    "node_modules",
+    "temp",
+    "test",
+    "test.js",
+    "tmp"
+  ],
+  "contributors": [
+    "Andrea Parodi (https://twitter.com/parroit)",
+    "Jon Schlinkert (http://twitter.com/jonschlinkert)"
   ]
 }

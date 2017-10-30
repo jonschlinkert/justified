@@ -3,21 +3,16 @@
   "description": "Wrap words to a specified length and justified the text.",
   "version": "0.2.1",
   "homepage": "https://github.com/jonschlinkert/justified",
-  "author": {
-    "name": "Jon Schlinkert",
-    "url": "http://github.com/jonschlinkert/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/jonschlinkert/justified.git"
-  },
+  "author": "Jon Schlinkert (http://github.com/jonschlinkert)",
+  "contributors": [
+    "Andrea Parodi (https://twitter.com/parroit)",
+    "Jon Schlinkert (http://twitter.com/jonschlinkert)"
+  ],
+  "repository": "jonschlinkert/justified",
   "bugs": {
     "url": "https://github.com/jonschlinkert/justified/issues"
   },
-  "license": {
-    "type": "MIT",
-    "url": "https://github.com/jonschlinkert/justified/blob/master/LICENSE"
-  },
+  "license": "MIT",
   "files": [
     "index.js"
   ],
