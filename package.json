@@ -24,27 +24,56 @@
     "test": "mocha"
   },
   "dependencies": {
-    "longest": "^1.0.0",
-    "repeat-string": "^1.5.0",
-    "word-wrap": "^1.0.2"
+    "longest": "^2.0.1",
+    "repeat-string": "^1.6.1",
+    "word-wrap": "^1.2.3"
   },
   "devDependencies": {
-    "mocha": "^2.2.1"
+    "gulp-format-md": "^1.0.0",
+    "mocha": "^3.2.0"
   },
   "keywords": [
     "align",
+    "aligned",
     "alignment",
     "break",
+    "console",
+    "justification",
     "justified",
     "justify",
     "line",
     "pad",
+    "padded",
     "padding",
+    "prompt",
+    "repeat",
     "soft",
+    "string",
+    "terminal",
     "text",
     "word",
     "word-wrap",
     "words",
     "wrap"
-  ]
+  ],
+  "verb": {
+    "toc": false,
+    "layout": "default",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "related": {
+      "list": [
+        "pad-right",
+        "pad-left",
+        "repeat-string"
+      ]
+    },
+    "lint": {
+      "reflinks": true
+    }
+  }
 }
