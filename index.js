@@ -8,44 +8,23 @@
 var repeat = require('repeat-string');
 var longest = require('longest');
 var wrap = require('word-wrap');
+var lastRandomIndex = 0;
 
-var randomTable = [
-  0.14975434898516649,
-  0.48920102670502064,
-  0.5460856891554375,
-  0.843156677246687,
-  0.5339584048702419,
-  0.6557222579529927,
-  0.025277961886063904,
-  0.7906919328816282,
-  0.39547316726978843,
-  0.8046447313481258,
-  0.40539968121122616,
-  0.3240593946801942,
-  0.04700841115323562
-];
 
-var lastUsedRandom = 0;
+module.exports = function(str, options) {
+  var opts = Object.assign({}, options);
+  lastRandomIndex = 0;
 
-function pseudoRandom() {
-  var ret = randomTable[lastUsedRandom % randomTable.length];
-  lastUsedRandom = lastUsedRandom > 1000 ? 0 : lastUsedRandom + 1;
-  return ret;
-}
-module.exports = justify;
-
-function justify (str, opts) {
-  lastUsedRandom = 0;
-  opts = opts || {};
   str = wrap(str, opts);
-  var indent = repeat(' ', opts.indent || 2);
-  var lines = str.split(/[\r\n]/);
+  var indent = opts.indent ? repeat(' ', opts.indent) : '';
+  var lines = str.split(/\r?\n/);
   var max = longest(lines).length;
-  var len = lines.length, i = 0;
+  var len = lines.length;
   var res = '';
 
-  while (len--) {
-    var line = trueUp(lines[i++].trim(), max) + '\n';
+  for (var i = 0; i < len; i++) {
+    var line = lines[i];
+    var line = toMaxLength(line.trim(), max) + '\n';
     if (len === 0) {
       line = line.split(' ').filter(Boolean).join(' ');
     }
@@ -54,26 +33,68 @@ function justify (str, opts) {
   return res;
 }
 
-function trueUp(str, max) {
+function toMaxLength(str, max) {
   var len = str.length;
   var diff = max - len;
   var segs = str.split(' ');
 
   while (diff--) {
-    segs[random(0, segs.length - 2)] += ' ';
+    segs[random(segs.length - 2)] += ' ';
   }
 
   var res = segs.join(' ').trim();
+  var n = 0;
   len = res.length;
   diff = max - len;
 
   if (diff > 0) {
-    var i = res.indexOf(' ', 1);
-    res = res.slice(0, i) + ' ' + res.slice(i);
+    var i = res.indexOf(' ', n);
+    while (/^[\w\d]/.test(res.slice(i))) {
+      res = res.slice(0, i) + ' ' + res.slice(i);
+      n = 1;
+    }
   }
   return res;
 }
 
-function random(min, max) {
-  return min + Math.floor(pseudoRandom() * (max - min + 1));
+function random(max) {
+  return Math.floor(pseudoRandom() * (max + 1));
+}
+
+/**
+ * Default randomization logic. The main point of this is to
+ * have enough of an appearance of randomization to ensure
+ * that whitespace isn't aligned in columns on the left or right
+ * side of the text, whilst also making the result technically
+ * predictable so that you're not getting a different result
+ * every time you call the "justified" function.
+ */
+
+function pseudoRandom() {
+  var randomTable = [
+    0.14975434898516649,
+    0.48920102670502064,
+    0.5460856891554375,
+    0.843156677246687,
+    0.5339584048702419,
+    0.6557222579529927,
+    0.025277961886063904,
+    0.7906919328816282,
+    0.39547316726978843,
+    0.8046447313481258,
+    0.40539968121122616,
+    0.3240593946801942,
+    0.04700841115323562
+  ];
+
+  var multiplier = randomTable[lastRandomIndex % randomTable.length];
+
+  // halt index when it hits 1000, no need to let it grow
+  if (lastRandomIndex > 1000) {
+    lastRandomIndex = 0;
+  } else {
+    lastRandomIndex++;
+  }
+
+  return multiplier;
 }
