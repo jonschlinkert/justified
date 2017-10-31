@@ -1,7 +1,7 @@
 {
   "name": "justified",
   "description": "Wraps words to a specified length and justifies the text in each line.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/jonschlinkert/justified",
   "author": "Jon Schlinkert (http://github.com/jonschlinkert)",
   "contributors": [
