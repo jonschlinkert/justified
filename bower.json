@@ -1,6 +1,6 @@
 {
   "name": "justified",
-  "description": "Wrap words to a specified length and justified the text.",
+  "description": "Wraps words to a specified length and justifies the text in each line.",
   "repository": "jonschlinkert/justified",
   "license": "MIT",
   "homepage": "https://github.com/jonschlinkert/justified",
@@ -39,7 +39,7 @@
     "words",
     "wrap"
   ],
-  "version": "0.2.1",
+  "version": "1.0.1",
   "bugs": {
     "url": "https://github.com/jonschlinkert/justified/issues"
   },

@@ -1,7 +1,7 @@
 /*!
  * justified <https://github.com/jonschlinkert/justified>
  *
- * Copyright (c) 2014-2017, Jon Schlinkert.
+ * Copyright (c) 2014-2018, Jon Schlinkert.
  * Released under the MIT License.
  */
 
